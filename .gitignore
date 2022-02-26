@@ -1,5 +1,6 @@
 # Gitignore personal references / sources dir. Sources are cited in README.
 Ref-Studies/
+Testing_notebook.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
