@@ -51,14 +51,14 @@ def getDeltas(closePricesDF):
 
 def plotDeltas(logDeltas, mu, sigma):
     """
-    plotDeltas plots the distribution of the log returns. 
+    plotDeltas plots the distribution of the logReturnsas well as the theoretical normal distribution for comparison.
+    Recall Geometric Brownian Motion assumes log of changes in stock price to be normally distributed.
 
-    :param closePricesDF: Pandas DF containing closing prices for a given stock.
+    :param logDeltas: Natural log of deltas (as numpy array).
+    :param mu: The computed Drift (mean of logDeltas).
+    :param sigma: The computed Volatility (stdev of logDeltas).
 
-    :return deltas: Deltas between each element in closePricesDF (as numpy array).
-    :return logDeltas: Natural log of deltas (as numpy array).
-    :return mu: The computed Drift (mean of logDeltas).
-    :return sigma: The computed Volatility (stdev of logDeltas).
+    :return: N/A
     """ 
 
     # Calc theoretical std. dist
@@ -67,13 +67,11 @@ def plotDeltas(logDeltas, mu, sigma):
     normTheo = norm.pdf(xAxis, mu, sigma)
 
     plt.figure()
-    plt.plot(xAxis, normTheo, 'k-')
     plt.hist(logDeltas, density=True)
-    plt.title("Log Returns Vs. Best Normal Approximation")
-    plt.xlabel("Log Returns");plt.ylabel("Frequency")
+    plt.plot(xAxis, normTheo, 'k-')
+    
+    plt.title("Log Returns Distribution Vs. Best Normal Approximation")
+    plt.xlabel("Log Returns");plt.ylabel("Density")
     plt.grid()
-    plt.legend({"Actual Distr.","Best Approx."})
+    plt.legend({"Actual Distr.", "Best Approx."})
     plt.show()
-
-
-
