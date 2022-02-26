@@ -23,5 +23,5 @@
 #      [Git]: github.com/realsurya      #
 #---------------------------------------#
 
-
+def evaluate(openPricesDF, closePricesDF, propogateFor, )
 
