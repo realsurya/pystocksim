@@ -63,19 +63,11 @@ numTrials = 50000
 allFutureAbs, allFutureRel, allFutureROI, logDeltas, mu, sigma = pequities.evaluate(opens, closes, propogateFor, numTrials)
 ```
 
-```python
-ret.plotDeltas(logDeltas, mu, sigma)
-```
-
-<img src="file:///C:/Users/aeros/Downloads/QuickStartGuide/output_7_0.png" title="" alt="output_7_0.png" width="363">
-
 ###### Gain Insights Fast.
 
 ```python
 pequities.insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor)![png](output_7_0.png)
 ```
-
-![output_9_0.png](C:\Users\aeros\Downloads\QuickStartGuide\output_9_0.png)
 
 ```
 Looking at the 50000 trials conducted, here are the insights:
@@ -95,7 +87,7 @@ numProfit, pctProfit, numLoss, pctLoss, meanEnd, meanChg, meanPct = pequities.st
 
 # Further Documentation
 
-The quick start guide can also be found in ipynb (Jupyter Lab) format in this repo. Additionally, documentation for each function can be found in the respective docstring.
+The quick start guide can also be found in ipynb (Jupyter Lab) format in this repo. This includes the plots pystocksim will output. Additionally, documentation for each function can be found in the respective docstring.
 
 # Future Expandability
 
