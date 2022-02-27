@@ -72,10 +72,11 @@ def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     :insigits: will provide a high-level interactive summary of the simulations.
                Strongly recommend use of jupyter-lab or notebook to view results.
 
-    :param openPricesDF: Pandas DF containing opening prices for a given stock.
-    :param closePricesDF: Pandas DF containing closing prices for a given stock.
-    :param propogateFor: Number of time units to run the simulations for (determines size of return).
-    :param numTrials: Number of simulations to run
+    :param allFutureAbs: The final absolute prices of the stock across all simulations (as numpy array).
+    :param allFutureRel: The final price delta from starting price across all simulations (as numpy array).
+    :param allFutureROI: The final percent change in stock price across all simulaitons (as numpy array). 
+    :param numTrials: Number of simulations ran.
+    :param propogateFor: Number of time units the simulation was run for.
 
     :return: N/A
     """
@@ -101,10 +102,11 @@ def stats(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
     :stats: Same as :insights: but not interactive
 
-    :param openPricesDF: Pandas DF containing opening prices for a given stock.
-    :param closePricesDF: Pandas DF containing closing prices for a given stock.
-    :param propogateFor: Number of time units to run the simulations for (determines size of return).
-    :param numTrials: Number of simulations to run
+    :param allFutureAbs: The final absolute prices of the stock across all simulations (as numpy array).
+    :param allFutureRel: The final price delta from starting price across all simulations (as numpy array).
+    :param allFutureROI: The final percent change in stock price across all simulaitons (as numpy array). 
+    :param numTrials: Number of simulations ran.
+    :param propogateFor: Number of time units the simulation was run for.
 
     :return numProfit: Number of trials resulting in profit (ROI > 0).
     :return pctProfit: Percent of trials resulting in a Profit.
