@@ -30,7 +30,7 @@ from scipy.stats import norm
 
 def getDeltas(closePricesDF):
     """
-    getReturns computes and returns the deltas between each element for a given array of closing prices.
+    :getReturns: computes and returns the deltas between each element for a given array of closing prices.
 
     :param closePricesDF: Pandas DF containing closing prices for a given stock.
 
@@ -51,7 +51,7 @@ def getDeltas(closePricesDF):
 
 def plotDeltas(logDeltas, mu, sigma):
     """
-    plotDeltas plots the distribution of the logReturnsas well as the theoretical normal distribution for comparison.
+    :plotDeltas: plots the distribution of the logReturnsas well as the theoretical normal distribution for comparison.
     Recall Geometric Brownian Motion assumes log of changes in stock price to be normally distributed.
 
     :param logDeltas: Natural log of deltas (as numpy array).
@@ -72,5 +72,4 @@ def plotDeltas(logDeltas, mu, sigma):
     plt.title("Log Returns Distribution Vs. Best Normal Approximation")
     plt.xlabel("Log Returns");plt.ylabel("Density")
     plt.grid()
-    plt.legend({"Actual Distr.", "Best Approx."})
     plt.show()

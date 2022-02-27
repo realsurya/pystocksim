@@ -27,7 +27,7 @@ import numpy as np
 
 def runMonteCarlo(startPrice, mu, sigma, propogateFor):
     """
-    runMonteCarlo uses the Monte-Carlo Method with Geometric Brownian Motion to 
+    :runMonteCarlo: uses the Monte-Carlo Method with Geometric Brownian Motion to 
     predict future closing price of a stock in the short-term.
 
     Note first day returned will always be equal to startPrice (for day 0).

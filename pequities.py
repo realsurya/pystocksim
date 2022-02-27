@@ -31,7 +31,7 @@ import mcarlo as mc
 
 def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
     """
-    evaluate will run the Monte-Carlo simulation for a certain number of trials.
+    :evaluate: will run the Monte-Carlo simulation for a certain number of trials.
 
     Note first day returned will always be equal to startPrice (for day 0).
     Therefore, number of elements returned will be propogateFor + 1
@@ -41,8 +41,8 @@ def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
     :param propogateFor: Number of time units to run the simulations for (determines size of return).
     :param numTrials: Number of simulations to run
 
-    :return allFuturesAbs: The final absolute prices of the stock across all simulations (as numpy array).
-    :return allFuturesRel: The final price delta from starting price across all simulations (as numpy array).
+    :return allFutureAbs: The final absolute prices of the stock across all simulations (as numpy array).
+    :return allFutureRel: The final price delta from starting price across all simulations (as numpy array).
     :return allFutureROI: The final percent change in stock price across all simulaitons (as numpy array). 
     """
 
@@ -60,8 +60,23 @@ def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
 
         futureAbs, futureRel, pChange = mc.runMonteCarlo(startPrice, mu, sigma, propogateFor)
 
-        allFuturesAbs[trial] = futureAbs[-1]
-        allFuturesRel[trial] = futureRel[-1]
+        allFutureAbs[trial] = futureAbs[-1]
+        allFutureRel[trial] = futureRel[-1]
         allFutureROI[trial] = pChange[-1]
 
-    return allFuturesAbs, allFuturesRel, allFutureROI
+    return allFutureAbs, allFutureRel, allFutureROI
+
+def insigits(allFutureAbs, allFutureRel, allFutureROI):
+    """
+    :insigits: will provide a high-level summary of the simulations.
+
+    :param openPricesDF: Pandas DF containing opening prices for a given stock.
+    :param closePricesDF: Pandas DF containing closing prices for a given stock.
+    :param propogateFor: Number of time units to run the simulations for (determines size of return).
+    :param numTrials: Number of simulations to run
+
+    :return allFutureAbs: The final absolute prices of the stock across all simulations (as numpy array).
+    :return allFutureRel: The final price delta from starting price across all simulations (as numpy array).
+    :return allFutureROI: The final percent change in stock price across all simulaitons (as numpy array). 
+    """
+    pass
