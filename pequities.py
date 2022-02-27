@@ -26,10 +26,12 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+#from numba import jit
 
 import returns as ret
 import mcarlo as mc
 
+#@jit(nopython=True, cache=True)
 def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
     """
     :evaluate: will run the Monte-Carlo simulation for a certain number of trials.
@@ -67,6 +69,7 @@ def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
 
     return allFutureAbs, allFutureRel, allFutureROI, logDeltas, mu, sigma
 
+#@jit(nopython=True, cache=True)
 def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
     :insigits: will provide a high-level interactive summary of the simulations.
@@ -98,6 +101,7 @@ def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     print("\n   -> Mean End Price: " + str(np.round(allFutureAbs.mean(), 4)) + " $.")
     print("   -> Mean Change: " + str(np.round(allFutureRel.mean(), 4)) + " $ (" + str(np.round(allFutureROI.mean(), 4)) + "%).")
 
+#@jit(nopython=True, cache=True)
 def stats(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
     :stats: Same as :insights: but not interactive

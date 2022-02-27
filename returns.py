@@ -27,7 +27,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import norm
+#from numba import jit
 
+#@jit(nopython=True, cache=True)
 def getDeltas(closePricesDF):
     """
     :getReturns: computes and returns the deltas between each element for a given array of closing prices.
@@ -48,7 +50,7 @@ def getDeltas(closePricesDF):
 
     return deltas[1:], logDeltas[1:], mu, sigma
 
-
+#@jit(nopython=True, cache=True)
 def plotDeltas(logDeltas, mu, sigma):
     """
     :plotDeltas: plots the distribution of the logReturnsas well as the theoretical normal distribution for comparison.

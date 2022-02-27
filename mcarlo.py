@@ -24,7 +24,9 @@
 #---------------------------------------#
 
 import numpy as np
+#from numba import jit
 
+#@jit(nopython=True, cache=True)
 def runMonteCarlo(startPrice, mu, sigma, propogateFor):
     """
     :runMonteCarlo: uses the Monte-Carlo Method with Geometric Brownian Motion to 
@@ -59,5 +61,3 @@ def runMonteCarlo(startPrice, mu, sigma, propogateFor):
     pChange =  (futureRel/startPrice) * 100
 
     return futureAbs, futureRel, pChange
-
-
