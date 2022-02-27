@@ -69,7 +69,7 @@ def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
 
 def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
-    :insigits: will provide a high-level summary of the simulations.
+    :insigits: will provide a high-level interactive summary of the simulations.
                Strongly recommend use of jupyter-lab or notebook to view results.
 
     :param openPricesDF: Pandas DF containing opening prices for a given stock.
@@ -81,7 +81,7 @@ def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
 
     plt.figure()
-    plt.hist(allFutureRel, bins=100)
+    plt.hist(allFutureROI, bins=100)
     plt.axvline(0, color='black')
 
     plt.grid()
@@ -94,5 +94,34 @@ def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
 
     print("   -> Profitable Trials: " + str(sum(allFutureROI > 0)) + " (" + str(np.round(((sum(allFutureROI > 0)/numTrials)*100), 2)) + "%).")
     print("   -> Unprofitable Trials: " + str(sum(allFutureROI < 0)) + " (" + str(np.round(((sum(allFutureROI < 0)/numTrials)*100), 2)) + "%).")
-    print("\n   -> Mean End Price: $" + str(np.round(allFutureAbs.mean(), 4)))
-    print("   -> Mean Change: $" + str(np.round(allFutureRel.mean(), 4)) + " (" + str(np.round(allFutureROI.mean(), 4)) + "%)")
+    print("\n   -> Mean End Price: " + str(np.round(allFutureAbs.mean(), 4)) + "$.")
+    print("   -> Mean Change: " + str(np.round(allFutureRel.mean(), 4)) + "$ (" + str(np.round(allFutureROI.mean(), 4)) + "%).")
+
+def stats(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
+    """
+    :stats: Same as :insights: but not interactive
+
+    :param openPricesDF: Pandas DF containing opening prices for a given stock.
+    :param closePricesDF: Pandas DF containing closing prices for a given stock.
+    :param propogateFor: Number of time units to run the simulations for (determines size of return).
+    :param numTrials: Number of simulations to run
+
+    :return numProfit: Number of trials resulting in profit (ROI > 0).
+    :return pctProfit: Percent of trials resulting in a Profit.
+    :return numloss: Number of trials resulting in profit (ROI > 0).
+    :return pctlos: Percent of trials resulting in a Profit.
+    :return meanEnd: Mean ending price of stock.
+    :return meanChg: Mean change in price of stock.
+    :return meanPct: Mean percent change in price of stock.
+    """
+    numProfit = sum(allFutureROI > 0)
+    pctProfit = ((sum(allFutureROI > 0)/numTrials)*100)
+
+    numLoss = sum(allFutureROI < 0)
+    pctLoss = ((sum(allFutureROI < 0)/numTrials)*100)
+
+    meanEnd = allFutureAbs.mean()
+    meanChg = allFutureRel.mean()
+    meanPct = allFutureROI.mean()
+
+    return numProfit, pctProfit, numLoss, pctLoss, meanEnd, meanChg, meanPct
