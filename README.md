@@ -34,7 +34,7 @@ Much of the functionality of this program is based on these excellent studies be
 import yfinance as yf
 import numpy as np
 
-import pequities
+import pystocksim
 import returns as ret
 ```
 
@@ -60,13 +60,13 @@ closes = historicals.iloc[:,3]
 propogateFor = 14
 numTrials = 50000
 
-allFutureAbs, allFutureRel, allFutureROI, logDeltas, mu, sigma = pequities.evaluate(opens, closes, propogateFor, numTrials)
+allFutureAbs, allFutureRel, allFutureROI, logDeltas, mu, sigma = pystocksim.evaluate(opens, closes, propogateFor, numTrials)
 ```
 
 ###### Gain Insights Fast.
 
 ```python
-pequities.insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor)![png](output_7_0.png)
+pystocksim.insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor)![png](output_7_0.png)
 ```
 
 ```
@@ -81,7 +81,7 @@ Looking at the 50000 trials conducted, here are the insights:
 
 ```python
 # Or use the non-interactive function to directly access these statistics:
-numProfit, pctProfit, numLoss, pctLoss, meanEnd, meanChg, meanPct = pequities.stats(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor)
+numProfit, pctProfit, numLoss, pctLoss, meanEnd, meanChg, meanPct = pystocksim.stats(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor)
 # Or just do your own analysis :)
 ```
 
@@ -99,4 +99,4 @@ The quick start guide can also be found in ipynb (Jupyter Lab) format in this re
 
 # Issue Reporting
 
-Please report issues through the github repository page.
+Please report issues through the Github repository page.
