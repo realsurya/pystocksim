@@ -1,7 +1,6 @@
 #---------------------------------------#
 #               :PROJECT:               #
-#    ~Monte-Carlo Sim. for Equities~    #
-#              ~Pequities~              #
+#     ~Monte-Carlo Sim. for Stocks~     #
 #           ___           ___           #
 #          /\__\         /\  \          #
 #         /:/ _/_       |::\  \         #
