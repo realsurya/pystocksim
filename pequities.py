@@ -23,5 +23,20 @@
 #      [Git]: github.com/realsurya      #
 #---------------------------------------#
 
-def evaluate(openPricesDF, closePricesDF, propogateFor, )
+import numpy as np
+import matplotlib.pyplot as plt
 
+import returns as ret
+import mcarlo as mc
+
+def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
+
+    deltas, logDeltas, mu, sigma = ret.getDeltas(closes)
+    ret.plotDeltas(logDeltas, mu, sigma)
+
+    startPrice = closePricesDF[closePricesDF.size -1]
+
+    allFutureAbs, allFutureRel, allFutureROI = np.zeros(numTrials + 1)
+
+    for trial in range(1, numTrials + 1):
+        futureAbs, futureRel, pChange = mc.runMonteCarlo(startPrice, mu, sigma, propogateFor)

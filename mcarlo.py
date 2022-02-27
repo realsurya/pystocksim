@@ -30,26 +30,34 @@ def runMonteCarlo(startPrice, mu, sigma, propogateFor):
     runMonteCarlo uses the Monte-Carlo Method with Geometric Brownian Motion to 
     predict future closing price of a stock in the short-term.
 
+    Note first day returned will always be equal to startPrice (for day 0).
+    Therefore, number of elements returned will be propogateFor + 1
+
     :param startPrice: The initial condition for this simulation (Initial price).
     :param mu: The computed Drift (mean of logDeltas).
     :param sigma: The computed Volatility (stdev of logDeltas).
     :param propogateFor: Number of time units to run the simulations for (determines size of return).
 
-    :return future: The future prices of the stock for this simulation (as numpy array). 
+    :return futureAbs: The future absolute prices of the stock for this simulation (as numpy array).
+    :return futureRel: The future changes in price of the stock for this simulation relative to start price (as numpy array).
+    :return pChange: The percent change in stock price for this simulation relative to start price (as numpy array). 
     """ 
-    days = np.arange(0,propogateFor,1)
-    future = np.zeros(propogateFor)
+    iterations = np.arange(0,(propogateFor + 1),1)
+    futureAbs = np.zeros(propogateFor + 1)
 
-    for day in days:
+    for iteration in iterations:
         bMotion = np.random.randn()
 
-        if day == 0:
+        if iteration == 0:
             newPrice = startPrice
         else:
-            newPrice = future[day-1] * np.exp((mu - (0.5*(sigma**2))) + (sigma * bMotion))
+            newPrice = futureAbs[iteration-1] * np.exp((mu - (0.5*(sigma**2))) + (sigma * bMotion))
 
-        future[day] = newPrice
+        futureAbs[iteration] = newPrice
 
-    return future
+    futureRel = futureAbs - startPrice
+    pChange =  (futureRel/startPrice) * 100
+
+    return futureAbs, futureRel, pChange
 
 

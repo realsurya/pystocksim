@@ -61,7 +61,6 @@ def plotDeltas(logDeltas, mu, sigma):
     :return: N/A
     """ 
 
-    # Calc theoretical std. dist
     logDeltas.sort()
     xAxis = np.linspace(logDeltas.min(), logDeltas.max(), 500)
     normTheo = norm.pdf(xAxis, mu, sigma)
