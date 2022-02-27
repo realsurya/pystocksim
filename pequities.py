@@ -43,11 +43,13 @@ def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
     :return allFutureAbs: The final absolute prices of the stock across all simulations (as numpy array).
     :return allFutureRel: The final price delta from starting price across all simulations (as numpy array).
     :return allFutureROI: The final percent change in stock price across all simulaitons (as numpy array). 
+    :return logDeltas: Natural log of deltas (as numpy array).
+    :return mu: The computed Drift (mean of logDeltas).
+    :return sigma: The computed Volatility (stdev of logDeltas).
     """
 
 
     deltas, logDeltas, mu, sigma = ret.getDeltas(closePricesDF)
-    ret.plotDeltas(logDeltas, mu, sigma)
 
     startPrice = closePricesDF[closePricesDF.size -1]
 
@@ -63,9 +65,7 @@ def evaluate(openPricesDF, closePricesDF, propogateFor, numTrials):
         allFutureRel[trial] = futureRel[-1]
         allFutureROI[trial] = pChange[-1]
 
-    print("Completed running " + str(numTrials) + " Trials of " + str(propogateFor) + " time units each.")
-
-    return allFutureAbs, allFutureRel, allFutureROI
+    return allFutureAbs, allFutureRel, allFutureROI, logDeltas, mu, sigma
 
 def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
@@ -92,10 +92,10 @@ def insigits(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
 
     print("\nLooking at the " + str(numTrials) + " trials conducted, here are the insights:\n")
 
-    print("   -> Profitable Trials: " + str(sum(allFutureROI > 0)) + " (" + str(np.round(((sum(allFutureROI > 0)/numTrials)*100), 2)) + "%).")
-    print("   -> Unprofitable Trials: " + str(sum(allFutureROI < 0)) + " (" + str(np.round(((sum(allFutureROI < 0)/numTrials)*100), 2)) + "%).")
-    print("\n   -> Mean End Price: " + str(np.round(allFutureAbs.mean(), 4)) + "$.")
-    print("   -> Mean Change: " + str(np.round(allFutureRel.mean(), 4)) + "$ (" + str(np.round(allFutureROI.mean(), 4)) + "%).")
+    print("   -> Profitable Trials (ROI>0): " + str(sum(allFutureROI > 0)) + " (" + str(np.round(((sum(allFutureROI > 0)/numTrials)*100), 2)) + "%).")
+    print("   -> Unprofitable Trials (ROI<0): " + str(sum(allFutureROI < 0)) + " (" + str(np.round(((sum(allFutureROI < 0)/numTrials)*100), 2)) + "%).")
+    print("\n   -> Mean End Price: " + str(np.round(allFutureAbs.mean(), 4)) + " $.")
+    print("   -> Mean Change: " + str(np.round(allFutureRel.mean(), 4)) + " $ (" + str(np.round(allFutureROI.mean(), 4)) + "%).")
 
 def stats(allFutureAbs, allFutureRel, allFutureROI, numTrials, propogateFor):
     """
